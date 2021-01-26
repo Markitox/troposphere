@@ -14,33 +14,19 @@ class ModuleLoggingConfiguration(AWSProperty):
 class LoggingConfiguration(AWSProperty):
 
     props = {
-        "DagProcessingLogs": ModuleLoggingConfiguration,
-        "SchedulerLogs": ModuleLoggingConfiguration,
-        "TaskLogs": ModuleLoggingConfiguration,
-        "WebserverLogs": ModuleLoggingConfiguration,
-        "WorkerLogs": ModuleLoggingConfiguration
-    }
-
-
-class SecurityGroupList(AWSProperty):
-
-    props = {
-        "SecurityGroupList": ([basestring], False)
-    }
-
-
-class SubnetList(AWSProperty):
-
-    props = {
-        "SubnetList": ([basestring], False)
+        "DagProcessingLogs": (ModuleLoggingConfiguration, False),
+        "SchedulerLogs": (ModuleLoggingConfiguration, False),
+        "TaskLogs": (ModuleLoggingConfiguration, False),
+        "WebserverLogs": (ModuleLoggingConfiguration, False),
+        "WorkerLogs": (ModuleLoggingConfiguration, False)
     }
 
 
 class NetworkConfiguration(AWSProperty):
 
     props = {
-        "SecurityGroupIds": SecurityGroupList,
-        "SubnetIds": SubnetList
+        "SecurityGroupIds": ([basestring], False),
+        "SubnetIds": ([basestring], False)
     }
 
 
