@@ -72,7 +72,7 @@ class LoggingConfiguration(AWSProperty):
         "SchedulerLogs": (ModuleLoggingConfiguration, False),
         "TaskLogs": (ModuleLoggingConfiguration, False),
         "WebserverLogs": (ModuleLoggingConfiguration, False),
-        "WorkerLogs": (ModuleLoggingConfiguration, False),
+        "WorkerLogs": (ModuleLoggingConfiguration, False)
     }
 
 
