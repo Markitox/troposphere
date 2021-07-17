@@ -3,7 +3,7 @@
 #
 # See LICENSE file for full license.
 
-from . import AWSObject, AWSProperty, Tags
+from . import AWSObject, AWSProperty, Tags, AWSHelperFn
 from .validators import boolean, integer
 
 
@@ -20,6 +20,42 @@ class LastUpdate(AWSProperty):
         "Error": (UpdateError, False),
         "Status": (str, False),
     }
+
+
+class AirflowConfigurationOption(AWSHelperFn):
+    def __init__(self, k, v):
+        self.data = {k: v}
+
+
+class AirflowConfigurationOptions(AWSHelperFn):
+    def __init__(self, args):
+        if not args:
+            raise (TypeError,
+                   'AirflowConfigurationOptions needs to be either'
+                   ' a dict or list of AirflowConfigurationOption')
+
+        if isinstance(args, AirflowConfigurationOption):
+            self.data = args.data
+        elif isinstance(args, dict):
+            self.data = args
+        elif isinstance(args, list) and args:
+            self.data = {}
+
+            for config in args:
+                if isinstance(config, AirflowConfigurationOption):
+                    self.data.update(config.data)
+                else:
+                    self.data.update(config)
+
+    def __add__(self, configuration_options):
+        configuration_options.data.update(
+            self.data
+        )
+
+        return configuration_options
+
+    def to_dict(self):
+        return self.data
 
 
 class ModuleLoggingConfiguration(AWSProperty):
